@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Length</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .wrap {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            background-image: url(http://bing.getlove.cn/bingImage/);
+            /* background-image: url("./img/bg.jpg"); */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .wrap-son {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            background: rgba(59, 59, 59, 0.3);
+        }
+
+        .jumbotron {
+            background: rgba(255, 255, 255, 0);
+            color: #f5f5f5;
+        }
+
+        .timer b {
+            font-size: 70px;
+        }
+
+        .Tfont {
+            color: snow;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: bold;
+            font-style: normal;
+
+        }
+
+        /* 
+        #d {
+            font-size: 100px;
+        }
+
+        #s {
+
+            font-size: 100px;
+            font-weight: bold;
+            font-style: oblique;
+            text-shadow: darkgray;
+            text-rendering: geometricPrecision;
+        } 
+        */
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="wrap-son">
+            <div class="container-fluid">
+                <div class="box">
+                    <div class="jumbotron text-center">
+                        <h1 class="Tfont">Life Length</h1>
+                        <h3 class="timer">
+                            <div class="row">
+                                <b id="Y"></b> 年
+                            </div>
+                            <div class="row">
+                                <b id="d"></b> 天 <b id="h"></b> 时 <b id="m"></b> 分
+                            </div>
+                            <div class="row">
+                                <b id="s"></b> 秒
+                            </div>
+                        </h3>
+                        <canvas id="c"></canvas>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 计时器 -->
+    <script>
+        function timer() {
+            var start = new Date("2023-4-12 06:06:06"); 
+            var t = new Date().getTime() - start;//原作者有bug，需添加.getTime();
+            // 秒
+            var s = ~~((t / 1000) % 60);
+            if (s < 10) {
+                s = "0" + s;
+            }
+            // 分
+            var m = ~~(t / 1000 / 60 % 60);
+            if (m < 10) {
+                m = "0" + m;
+            }
+            // 时
+            var h = ~~((t / 1000 / 60 / 60) % 24);
+            if (h < 10) {
+                h = "0" + h;
+            }
+            // 日
+            var d = ~~((t / 1000 / 60 / 60 / 24) % 365);
+
+            // 年
+            var Y = ~~(t / 1000 / 60 / 60 / 24 /365);
+            
+
+            document.getElementById('Y').innerHTML = Y;
+            document.getElementById('d').innerHTML = d;
+            document.getElementById('h').innerHTML = h;
+            document.getElementById('m').innerHTML = m;
+            document.getElementById('s').innerHTML = s;
+        }
+        timer();
+        setInterval(timer, 1000);
+    </script>
+
+</body>
+
+</html>
