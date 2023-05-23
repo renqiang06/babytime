@@ -20,25 +20,34 @@
             background-image: url(https://api.dujin.org/bing/m.php);
             /* background-image: url(http://bing.getlove.cn/bingImage/); */
             /* background-image: url("./img/bg.jpg"); */
-            background-size: cover;
+            /* background-size: cover; */
+            background-size: 100% 100%;
             background-position: center;
+            background-attachment: fixed;
         }
 
         .wrap-son {
             width: 100%;
             height: 100%;
             position: absolute;
+            /* position: relative; */
             top: 0;
             background: rgba(59, 59, 59, 0.3);
         }
 
         .jumbotron {
+            width: 100%;
+            height: 100%;
             background: rgba(255, 255, 255, 0);
             color: #f5f5f5;
         }
 
         .timer b {
             font-size: 70px;
+        }
+
+        .timer c {
+            font-size: 60px;
         }
 
         .Tfont {
@@ -49,20 +58,21 @@
 
         }
 
-        /* 
-        #d {
-            font-size: 100px;
+        .footer {
+            /* margin-top: -5px;
+            height: 5px;
+            background-color: #eee;
+            z-index: 9999; */
+
+            position: fixed;
+            left: 0px;
+            bottom: 0px;
+            width: 100%;
+            height: 30px;
+            background-color: #bc848400;
+            z-index: 9999;
         }
 
-        #s {
-
-            font-size: 100px;
-            font-weight: bold;
-            font-style: oblique;
-            text-shadow: darkgray;
-            text-rendering: geometricPrecision;
-        } 
-        */
     </style>
 </head>
 
@@ -73,7 +83,8 @@
                 <div class="box">
                     <div class="jumbotron text-center">
                         <h1 class="Tfont">Life Length</h1>
-                        <h3 class="timer">
+                        <HR style="FILTER: alpha(opacity=50,finishopacity=0,style=3)" width="90%" color=#987cb9 SIZE=1>
+                        <h5 class="timer">
                             <div class="row">
                                 <b id="Y"></b> 年
                             </div>
@@ -83,8 +94,27 @@
                             <div class="row">
                                 <b id="s"></b> 秒
                             </div>
-                        </h3>
-                        <canvas id="c"></canvas>
+
+                            <HR style="FILTER: alpha(opacity=50,finishopacity=0,style=3)" width="90%" color=#987cb9
+                                SIZE=1>
+                            <div class="row">
+                                <c id="w"></c> 周 <c id="wd"></c> 天
+                            </div>
+                            <div class="row">
+                                <c id="w38"></c>
+                                <c>/</c>
+                                <c id="w42"></c> 周 <c id="wd40"></c> 天
+                            </div>
+                        </h5>
+
+                        <!-- <br/> -->
+                        <HR style="FILTER: alpha(opacity=50,finishopacity=0,style=3)" width="50%" color=#987cb9 SIZE=1>
+
+                        <h5>
+                            <div class="footer">
+                                <b id="nowTime"></b>
+                            </div>
+                        </h5>
 
                     </div>
                 </div>
@@ -94,7 +124,7 @@
     <!-- 计时器 -->
     <script>
         function timer() {
-            var start = new Date("2023-4-12 06:06:06"); 
+            var start = new Date("2023-4-12 06:06:06");
             var t = new Date().getTime() - start;//原作者有bug，需添加.getTime();
             // 秒
             var s = ~~((t / 1000) % 60);
@@ -114,18 +144,54 @@
             // 日
             var d = ~~((t / 1000 / 60 / 60 / 24) % 365);
 
+            //周
+            var w = ~~(d / 7);
+
+            //周余数
+            var wd = ~~(d % 7);
+
+            //周40
+            var w40 = ~~((280 - d) / 7);
+
+            //周38
+            var w38 = ~~((266 - d) / 7);
+
+            //周42
+            var w42 = ~~((294 - d) / 7);
+
+            //周余数40
+            var wd40 = ~~((280 - d) % 7);
+
             // 年
-            var Y = ~~(t / 1000 / 60 / 60 / 24 /365);
-            
+            var Y = new Date().getFullYear() - start.getFullYear();
+
+            //当前
+            var nowTime = new Date().toLocaleString();
+            //当前ms
+            var nowTimems = new Date().getMilliseconds();
+            if (nowTimems < 10) {
+                nowTimems = "00" + nowTimems;
+            }
+            else if (nowTimems >= 10 & nowTimems < 100) {
+                nowTimems = "0" + nowTimems;
+            }
+
 
             document.getElementById('Y').innerHTML = Y;
+            document.getElementById('w').innerHTML = w;
+            document.getElementById('w38').innerHTML = w38;
+            // document.getElementById('w40').innerHTML = w40;
+            document.getElementById('w42').innerHTML = w42;
+            document.getElementById('wd').innerHTML = wd;
+            document.getElementById('wd40').innerHTML = wd40;
             document.getElementById('d').innerHTML = d;
             document.getElementById('h').innerHTML = h;
             document.getElementById('m').innerHTML = m;
             document.getElementById('s').innerHTML = s;
+            document.getElementById('nowTime').innerHTML = nowTime + " : " + nowTimems;
         }
         timer();
-        setInterval(timer, 1000);
+        setInterval(timer, 333);
     </script>
 
 </body>
