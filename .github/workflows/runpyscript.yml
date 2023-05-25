@@ -6,7 +6,7 @@ on:
       - master
   schedule:
     # IMPORTANT: Set cron job in UTC timezone
-    - cron:  '0 0/5 * * *'
+    - cron:  '0/5 * * * *'
 jobs:
   run-python-script:
     runs-on: ubuntu-latest
