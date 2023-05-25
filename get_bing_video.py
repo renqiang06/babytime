@@ -16,13 +16,13 @@ try:
         video_url = response.text[start_index:end_index] + ".mp4"
 
         response = requests.get(video_url)
-        with open(os.path.join("img", "video.mp4"), "wb") as f:
+        with open(os.path.join(os.getcwd(),"img\\video.mp4"), "wb") as f:
             f.write(response.content)
     else:
-        with open("py.log", "a", encoding= 'utf-8') as f:
+        with open(os.path.join(os.getcwd(),"py.log"), "a", encoding= 'utf-8') as f:
             f.write(time.strftime(
         "%Y-%m-%d %H:%M:%S", time.localtime()) + ':' +"没有视频\n")
 except Exception as e:
-    with open("py.log", "a", encoding= 'utf-8') as f:
+    with open(os.path.join(os.getcwd(),"py.log"), "a", encoding= 'utf-8') as f:
         f.write(time.strftime(
         "%Y-%m-%d %H:%M:%S", time.localtime()) + ':' +e)
