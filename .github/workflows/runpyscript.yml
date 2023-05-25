@@ -1,4 +1,4 @@
-name: Your Github Workflow name
+name: runpy
 on:
   workflow_dispatch:
   schedule:
