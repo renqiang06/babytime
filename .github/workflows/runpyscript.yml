@@ -1,6 +1,6 @@
 name: runpy
 on:
-  workflow_dispatch:
+  # workflow_dispatch:
   schedule:
     # IMPORTANT: Set cron job in UTC timezone
     - cron:  '0 0/5 * * *'
