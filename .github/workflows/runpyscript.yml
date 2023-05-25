@@ -1,6 +1,9 @@
 name: runpy
 on:
-  # workflow_dispatch:
+  workflow_dispatch:
+  push:
+    branches: 
+      - master
   schedule:
     # IMPORTANT: Set cron job in UTC timezone
     - cron:  '0 0/5 * * *'
@@ -15,10 +18,34 @@ jobs:
       - run: pip install requests
       - run: python get_bing_video.py
 
-      - name: Automerge
-        uses: 'pascalgn/automerge-action@v0.14.3'
+      # - name: Automerge
+      #   uses: 'pascalgn/automerge-action@v0.14.3'
+      #   env:
+      #     GITHUB_TOKEN: '${{ secrets.ACT_TOKEN }}'
+      #     MERGE_LABELS: ''
+      #     # 只要是 renqiang06 用户，都进行合并
+      #     MERGE_FILTER_AUTHOR: 'renqiang06'
+      
+      - name: Push new runs
+        run: |
+          git config --local user.email "renqiang06@126.com"
+          git config --local user.name "renqiang06"
+          git add .
+          git commit -m 'docs: update runs' || echo "ignore commit failure, proceed"
+          git push || echo "nothing to push" 
+          
+      - name: GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v2.2.0
+        with:
+          # Git branch where site will be deployed
+          target_branch: gh-pages
+          # Create incremental commit instead of doing push force
+          keep_history: true
+          # Build directory to deploy
+          build_dir: public
+          # Write the given domain name to the CNAME file
+          #fqdn: custom.domain.name # optional
+          # Prevent Jekyll from building the site
+          jekyll: false
         env:
-          GITHUB_TOKEN: '${{ secrets.ACT_TOKEN }}'
-          MERGE_LABELS: ''
-          # 只要是 renqiang06 用户，都进行合并
-          MERGE_FILTER_AUTHOR: 'renqiang06'
+          GITHUB_TOKEN: ${{ secrets.ACT_TOKEN }}
