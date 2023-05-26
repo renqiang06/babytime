@@ -78,6 +78,12 @@
             /* overflow: clip; */
         }
 
+        .hitokoto a{
+            font-family:'Times New Roman', Times, serif;
+            color: snow;
+            text-decoration: none;
+        }
+
         .footer {
             /* margin-top: -5px;
             height: 5px;
@@ -100,13 +106,17 @@
         <div class="wrap-son">
             <div class="container-fluid">
                 <div class="box">
+
                     <!-- 视频背景图 -->
                     <video id="video" poster="https://api.dujin.org/bing/m.php" autoplay loop muted>
-                    <!-- <video id="video" autoplay loop muted> -->
-                        <source src="./img/video.mp4"  type="video/mp4" />
+                        <!-- <video id="video" autoplay loop muted> -->
+                        <source src="./img/video-earth.mp4" type="video/mp4" />
                     </video>
                     <div class="jumbotron text-center">
-                        <h1 class="Tfont">Life Length</h1>
+                        <h4 class="hitokoto">
+                            <a id="hitokoto_text">:D 获取中...</a>
+                        </h4>
+                        <!-- <h1 class="Tfont">Life Length</h1> -->
                         <HR style="FILTER: alpha(opacity=50,finishopacity=0,style=3)" width="95%" color=#987cb9 SIZE=1>
                         <h5 class="timer">
                             <div class="row">
@@ -138,6 +148,8 @@
                                 <d>2024/01/03——2024/01/31</d>
                             </div>
                         </h4>
+                        
+                        
                         <h5>
                             <div class="footer">
                                 <c id="nowTime"></c>
@@ -157,7 +169,16 @@
         </div>
     </div>
 
-
+    <!-- 每日一言 -->
+    <script>
+        fetch('https://v1.hitokoto.cn')
+            .then(response => response.json())
+            .then(data => {
+                const hitokoto = document.querySelector('#hitokoto_text')
+                hitokoto.innerText = data.hitokoto
+            })
+            .catch(console.error)
+    </script>
     <!-- 计时器 -->
     <script>
         function timer() {

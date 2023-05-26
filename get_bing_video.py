@@ -7,10 +7,13 @@ import os
 import time
 
 url = "https://cn.bing.com/"
+# url ="https://ntp.msn.cn/edge/ntp?locale=zh-cn&dsp=0&sp=Google"
+# url = "https://ntp.msn.cn/edge/ntp?locale=zh-CN&title=新建标签页&dsp=1&sp=必应&prerender=1"
 response = requests.get(url)
 try:
     if response.text.find("background-image:url(")>0:
-        start_index = response.text.find("background-image:url(") + len("background-image:url(")
+        # //*[@id="backgroundImage"]/video
+        start_index = response.text.find("https://prod-streaming-video-msn-com") + len("https://prod-streaming-video-msn-com")
         end_index = response.text.find(".mp4") + len(".mp4")
 
         video_url = response.text[start_index:end_index] + ".mp4"
