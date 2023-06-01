@@ -18,7 +18,7 @@
 
         var audioBox = document.createElement("div");
         audioBox.id = "musicControl";
-        var boxDefaultStyle = "overflow:hidden;position:absolute;z-index:999;background-size: contain;background-repeat: no-repeat;width:30px;height:30px;"
+        var boxDefaultStyle = "overflow:hidden;margin: auto;z-index:999;background-size: contain;background-repeat: no-repeat;width:20px;height:20px;"
         audioBox.style = boxDefaultStyle + settings.position;
         audioBox.innerHTML = settings.htmls;
         //插入节点
@@ -39,7 +39,7 @@
                 audioTag.play();
                 audioBox.style.backgroundImage = audioBox.style.backgroundImage;
                 audioBox.style.cssText = audioBox.style.cssText + settings.position;
-                audioBox.style.cssText += ";animation: "+settings.animaClass+" .8s linear infinite;";
+                audioBox.style.cssText += ";animation: "+settings.animaClass+" 2s linear infinite;";
             },
             stop: function() {
                 audioTag.pause();
@@ -83,7 +83,7 @@
             });
         }
 
-        audioBox.style.cssText += ";animation: "+settings.animaClass+" .8s linear infinite;";
+        audioBox.style.cssText += ";animation: "+settings.animaClass+" 2s linear infinite;";
     };
     
     global[__INFO__.plugins] = PlayCode;
