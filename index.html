@@ -97,14 +97,21 @@
         }
 
         .button {
-            /* position:relative; */
+            /* background: transparent; */
+            background: rgba(255, 250, 250, 0.15);
+            border-width: 3px;
+            outline: none;
+            width: 80px;
+            height: auto;
+            position: relative;
             text-align: center;
-            border-radius: 50%;
-            font-size: 20px;
-            color: green;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: snow;
             line-height: 190rpx;
-            border: 10rpx solid green;
-            background: rgba(0, 0, 0, 0);
+            border: 3px solid rgba(245, 245, 245, 0);
+            z-index: 9999;
         }
 
         .footer {
@@ -171,9 +178,10 @@
                         </h4>
                         <!-- 音乐 -->
                         <div id="app">&nbsp</div>
-                    </div>
-                    <div class="button" onclick="yourbuttonclickfunction();">
-                        按我
+                        <br />
+                        <center><div class="button" onclick="clickme();">
+                            Update
+                        </div></center>
                     </div>
                 </div>
             </div>
@@ -195,6 +203,13 @@
             // position: "margin: auto;",
             animaClass: "muiscIconRotate"
         }); 
+    </script>
+    <!-- 按钮单击 -->
+    <script>
+        function clickme() {
+            // alert("123");
+            javascript: location.reload()
+        }
     </script>
     <!--光标之泡泡-->
     <!-- <script type="text/javascript" src="js/bubbleCursor.js"></script> -->
