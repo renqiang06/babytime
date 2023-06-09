@@ -4,12 +4,16 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="10">
+    <!-- <meta http-equiv="refresh" content="10"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌎</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
-    <style>a{TEXT-DECORATION:none}</style> 
+    <style>
+        a {
+            TEXT-DECORATION: none
+        }
+    </style>
     <style>
         html,
         body {
@@ -92,59 +96,34 @@
         }
 
         .hitokoto a {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-pack: center;
+            -webkit-box-align: center; 
+            overflow: hidden;
+            height: calc(1em * 2 * 1);
+            min-height: calc(12px * 2 * 1);
             font-family: 'Times New Roman', Times, serif;
             font-weight: bold;
             color: snow;
-            text-decoration: none;
+            /* text-decoration: none; */
         }
 
         .button {
             /* background: transparent; */
             background: rgba(255, 250, 250, 0.15);
-            border-width: 3px;
-            outline: none;
-            width: 80px;
             height: auto;
             position: relative;
             text-align: center;
-            border-radius: 20px;
             font-size: 18px;
             font-weight: bold;
             color: snow;
-            line-height: 190rpx;
-            border: 3px solid rgba(245, 245, 245, 0);
+            line-height: 590rpx;
+            border: 10px solid rgba(245, 245, 245, 0);
+            border-width: 10px;
+            border-radius: 20px;
             z-index: 9999;
         }
-
-        a:link,
-        a:visited {
-            color: snow;
-            font-size: 18px;
-            background-color: rgba(46, 226, 239, 0.15);
-            box-shadow: 5px;
-            box-sizing: 10px;
-            /* text-decoration: none; */
-        }
-
-        a:hover{
-            color: snow;
-            font-size: 25px;
-            background-color: rgba(46, 136, 239, 0.326);
-            box-shadow: 5px;
-            box-sizing: 10px;
-            border-radius: 10px;
-            /* text-decoration: none; */
-        }
-        a:active {
-            color: snow;
-            font-size: 25px;
-            background-color: rgba(46, 136, 239, 0.326);
-            box-shadow: 5px;
-            box-sizing: 10px;
-            border-radius: 10px;
-            /* text-decoration: none; */
-        }
-
 
         .footer {
             position: fixed;
@@ -172,7 +151,7 @@
                         <!-- <video id="video" autoplay loop muted> -->
                         <source src="./img/video-earth.mp4" type="video/mp4" />
                     </video>
-                    <div class="jumbotron text-center">
+                    <div id="jump" class="jumbotron text-center">
                         <h4 class="hitokoto">
                             <a id="hitokoto_text">&nbsp</a>
                         </h4>
@@ -211,13 +190,14 @@
                         <!-- 音乐 -->
                         <div id="app">&nbsp</div>
                         <br />
-                        <center>
+                        <!-- <center>
                             <div class="button" onclick="clickme();">
                                 Update
                             </div>
-                        </center>
-                        <div >&nbsp</div>
-                        <a href="https://wj.qq.com/s2/12528150/fe9a/" target="_blank">时间大竞猜</a>
+                        </center> -->
+                        <div>&nbsp</div>
+                        <a href="https://wj.qq.com/s2/12528150/fe9a/" type="button" class="button"
+                            target="_blank">时间竞猜</a>
                         <!-- <div align="center">
                             <img src="img/QR.png" height="60px" width="60px " />
                         </div> -->
@@ -260,14 +240,19 @@
     <script type="text/javascript" src="js/spiderwebs.js"></script>
     <!-- 每日一言 -->
     <script>
-        fetch('https://v1.hitokoto.cn')
-            .then(response => response.json())
-            .then(data => {
-                const hitokoto = document.querySelector('#hitokoto_text')
-                hitokoto.innerText = data.hitokoto
-            })
-            .catch(console.error)
+        function words() {
+            fetch('https://v1.hitokoto.cn')
+                .then(response => response.json())
+                .then(data => {
+                    const hitokoto = document.querySelector('#hitokoto_text')
+                    hitokoto.innerText = data.hitokoto
+                })
+                .catch(console.error)
+        }
+        words();
+        setInterval(words, 5000);
     </script>
+
     <!-- 计时器 -->
     <script>
         function timer() {
@@ -322,8 +307,6 @@
             else if (nowTimems >= 10 & nowTimems < 100) {
                 nowTimems = "0" + nowTimems;
             }
-
-
             document.getElementById('Y').innerHTML = Y;
             document.getElementById('w').innerHTML = w;
             document.getElementById('w38').innerHTML = w38;
@@ -343,5 +326,6 @@
     </script>
 
 </body>
+
 
 </html>
